@@ -6,24 +6,20 @@ export default function PaymentCard() {
   const amount = "₹1.00"
   
   const upiUrl = useMemo(() => {
-    // Generate unique transaction ID
-    const txnId = `TXN${Date.now()}${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+    // Generate unique transaction reference ID
+    const txnRef = `ORDER${Date.now()}`
     
-    const params = {
-      pa: process.env.NEXT_PUBLIC_UPI_ID,
-      pn: process.env.NEXT_PUBLIC_PAYEE_NAME,
-      tr: txnId,
-      tn: "ParkinToday Test Payment",
-      am: "1",
-      cu: "INR"
-    }
+    // Replace these with your actual UPI details
+    const upiId = process.env.NEXT_PUBLIC_UPI_ID // Your UPI ID
+    const payeeName = process.env.NEXT_PUBLIC_PAYEE_NAME // Payee name
+    const amount = "1.00"
+    const note = "ParkinToday Test Payment"
     
-    // Build URL with proper encoding
-    const queryString = Object.entries(params)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&")
+    // Build URL according to NPCI specifications
+    // Note: Spaces should be %20, order matters for some apps
+    const url = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(payeeName)}&tr=${encodeURIComponent(txnRef)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`
     
-    return `upi://pay?${queryString}`
+    return url
   }, [])
 
   return (
