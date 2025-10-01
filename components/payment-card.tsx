@@ -12,7 +12,7 @@ export default function PaymentCard() {
     // Replace these with your actual UPI details
     const upiId = process.env.NEXT_PUBLIC_UPI_ID // Your UPI ID
     const payeeName = process.env.NEXT_PUBLIC_PAYEE_NAME // Payee name
-    const amount = "1.00"
+    const amount = "15"
     const note = "ParkinToday Test Payment"
     
     // Build URL according to NPCI specifications
