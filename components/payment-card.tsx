@@ -3,7 +3,7 @@
 import { useMemo } from "react"
 
 export default function PaymentCard() {
-  const amount = "₹1.00"
+  const amount = "₹15.00"
   
   const upiUrl = useMemo(() => {
     // Generate unique transaction reference ID
