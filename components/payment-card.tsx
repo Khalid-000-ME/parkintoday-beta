@@ -14,9 +14,8 @@ export default function PaymentCard() {
       pn: process.env.NEXT_PUBLIC_PAYEE_NAME,
       tr: txnId,
       tn: "ParkinToday Test Payment",
-      am: "1.00",
-      cu: "INR",
-      mode: "02" // Changed from 00 to 02 for collect payment
+      am: "1",
+      cu: "INR"
     }
     
     // Build URL with proper encoding
