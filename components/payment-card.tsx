@@ -7,7 +7,7 @@ export default function PaymentCard() {
   const amount = "₹1.00"
   const upiUrl = useMemo(
     () =>
-      `upi://pay?pa=${process.env.NEXT_PUBLIC_UPI_ID}&pn=${process.env.NEXT_PUBLIC_PAYEE_NAME}&tr=UNIQUE_TXN_REF&tn=ParkinToday%20Test%20Payment&am=1.00&cu=INR&mode=00&orgid=000000`,
+      `upi://pay?pa=${process.env.NEXT_PUBLIC_UPI_ID}&pn=${process.env.NEXT_PUBLIC_PAYEE_NAME}&tr=UNIQUE_TXN_REF&tn=ParkinToday%20Test%20Payment&am=1&cu=INR&mode=00&orgid=000000`,
     [],
   )
 
