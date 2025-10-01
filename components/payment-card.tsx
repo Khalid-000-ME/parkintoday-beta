@@ -1,15 +1,31 @@
 "use client"
 
-import Link from "next/link"
 import { useMemo } from "react"
 
 export default function PaymentCard() {
   const amount = "₹1.00"
-  const upiUrl = useMemo(
-    () =>
-      `upi://pay?pa=${process.env.NEXT_PUBLIC_UPI_ID}&pn=${process.env.NEXT_PUBLIC_PAYEE_NAME}&tr=UNIQUE_TXN_REF&tn=ParkinToday%20Test%20Payment&am=1&cu=INR&mode=00&orgid=000000`,
-    [],
-  )
+  
+  const upiUrl = useMemo(() => {
+    // Generate unique transaction ID
+    const txnId = `TXN${Date.now()}${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+    
+    const params = {
+      pa: process.env.NEXT_PUBLIC_UPI_ID,
+      pn: process.env.NEXT_PUBLIC_PAYEE_NAME,
+      tr: txnId,
+      tn: "ParkinToday Test Payment",
+      am: "1.00",
+      cu: "INR",
+      mode: "02" // Changed from 00 to 02 for collect payment
+    }
+    
+    // Build URL with proper encoding
+    const queryString = Object.entries(params)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+      .join("&")
+    
+    return `upi://pay?${queryString}`
+  }, [])
 
   return (
     <div
@@ -32,13 +48,13 @@ export default function PaymentCard() {
         </div>
 
         <div className="flex items-center justify-center">
-          <Link
+          <a
             href={upiUrl}
             aria-label="Pay now via UPI"
             className="inline-flex min-w-[10rem] items-center justify-center rounded-full bg-emerald-600 px-6 py-3 font-semibold tracking-wide text-white shadow-sm transition-transform duration-150 hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 active:scale-[0.98]"
           >
             Pay Now
-          </Link>
+          </a>
         </div>
 
         <footer className="mt-6 text-center">
