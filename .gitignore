@@ -3,6 +3,11 @@
 # dependencies
 node_modules/
 
+.vscode
+
+.env*
+withRazorPay.js
+
 # Expo
 .expo/
 dist/
