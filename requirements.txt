@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pyngrok
+opencv-python
+numpy
+ultralytics
+transformers
+torch
+torchvision
+pillow
+sentencepiece
+supabase
+python-dotenv
