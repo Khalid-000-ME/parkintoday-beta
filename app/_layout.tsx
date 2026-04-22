@@ -1,7 +1,8 @@
-import { Stack } from 'expo-router';
+import { Stack, router } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   InstrumentSerif_400Regular,
 } from '@expo-google-fonts/instrument-serif';
@@ -22,8 +23,27 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded || error) {
       SplashScreen.hideAsync();
+      checkConfiguration();
     }
   }, [loaded, error]);
+
+  const checkConfiguration = async () => {
+    try {
+      const url = await AsyncStorage.getItem('ngrok_url');
+      if (!url) {
+        router.replace('/config');
+        return;
+      }
+
+      const user = await AsyncStorage.getItem('user_id');
+      if (!user) {
+        router.replace('/onboarding');
+        return;
+      }
+    } catch (e) {
+      console.error("Error checking config", e);
+    }
+  };
 
   if (!loaded && !error) {
     return null;
@@ -31,19 +51,35 @@ export default function RootLayout() {
 
   return (
     <Stack>
-      <Stack.Screen 
-        name="index" 
-        options={{ 
+      <Stack.Screen
+        name="index"
+        options={{
           title: 'Nearby Parking',
-          headerShown: false 
-        }} 
+          headerShown: false
+        }}
       />
-      <Stack.Screen 
-        name="upi" 
-        options={{ 
+      <Stack.Screen
+        name="upi"
+        options={{
           title: 'Confirm Parking',
           presentation: 'card'
-        }} 
+        }}
+      />
+      <Stack.Screen
+        name="config"
+        options={{
+          title: 'Setup',
+          headerShown: false,
+          gestureEnabled: false
+        }}
+      />
+      <Stack.Screen
+        name="onboarding"
+        options={{
+          title: 'Welcome',
+          headerShown: false,
+          gestureEnabled: false
+        }}
       />
     </Stack>
   );

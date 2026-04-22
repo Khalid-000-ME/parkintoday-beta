@@ -48,8 +48,8 @@ export default {
     },
     plugins: [
       "expo-router",
-      ["expo-splash-screen", 
-      {
+      ["expo-splash-screen",
+        {
           image: "./assets/images/splash-icon.png",
           imageWidth: 200,
           resizeMode: "contain",
@@ -57,7 +57,7 @@ export default {
           dark: {
             backgroundColor: "#000000"
           }
-        } ],
+        }],
       "expo-font"
     ],
     experiments: {
@@ -72,6 +72,7 @@ export default {
       paymentAmount: process.env.PAYMENT_AMOUNT || "20",
       RAZORPAY_KEY_ID: process.env.RAZORPAY_KEY_ID,
       RAZORPAY_KEY_SECRET: process.env.RAZORPAY_KEY_SECRET,
+      EXPO_PUBLIC_GOOGLE_MAPS_API_KEY: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
       router: {},
       eas: {
         projectId: "f54ad712-df4b-4651-9c3a-8958130c6f0c"
